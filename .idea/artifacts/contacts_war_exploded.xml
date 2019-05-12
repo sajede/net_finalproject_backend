@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="contacts:war exploded">
+    <output-path>D:/apache-tomcat-9.0.19/webapps/contacts</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>contacts</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="contacts" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="D:/apache-tomcat-9.0.19/webapps/contacts/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="contacts/web/Web" />
+    </root>
+  </artifact>
+</component>
