@@ -12,16 +12,27 @@ public class ReferrerEntity {
     CaseEntity caseEntity;
     UserEntity fromUser;
     UserEntity toUser;
-
+    int referrerNumber;
 
     public ReferrerEntity() {
     }
 
-    public ReferrerEntity(String comment, CaseEntity caseEntity, UserEntity fromUser, UserEntity toUser) {
+    public ReferrerEntity(int referrerNumber,String comment, CaseEntity caseEntity, UserEntity fromUser, UserEntity toUser) {
+        this.referrerNumber=referrerNumber;
         this.comment = comment;
         this.caseEntity = caseEntity;
         this.fromUser = fromUser;
         this.toUser = toUser;
+    }
+
+    @Basic
+    @Column(name="REFERRER_NUMBER")
+    public int getReferrerNumber() {
+        return referrerNumber;
+    }
+
+    public void setReferrerNumber(int referrerNumber) {
+        this.referrerNumber = referrerNumber;
     }
 
     @Basic

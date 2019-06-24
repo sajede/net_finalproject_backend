@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import ir.asta.training.contacts.entities.ContactEntity;
+import ir.asta.training.contacts.entities.UserEntity;
 
 @Named("contactDao")
 public class ContactDao {
@@ -19,7 +20,7 @@ public class ContactDao {
 	}
 	
 	public ContactEntity load(Long id) {
-		// TODO implement this method
+		entityManager.find(UserEntity.class,id);
 		return null;
 	}
 	

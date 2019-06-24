@@ -6,6 +6,8 @@ import ir.asta.wise.core.datamanagement.ActionResult;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
 
 @Path("/case")
 public interface CaseService {
@@ -20,5 +22,11 @@ public interface CaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ActionResult<Long> save(CaseEntity entity);
+
+	/*@POST
+	@Path("/add")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response add(CaseEntity entity) throws IOException;*/
 	
 }

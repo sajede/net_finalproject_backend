@@ -1,7 +1,6 @@
 package ir.asta.training.contacts.services;
 
 import ir.asta.training.contacts.entities.ReferrerEntity;
-import ir.asta.training.contacts.entities.UserEntity;
 import ir.asta.wise.core.datamanagement.ActionResult;
 
 import javax.ws.rs.*;

@@ -1,6 +1,8 @@
 package ir.asta.training.contacts.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +14,7 @@ public class CaseEntity {
 
     Long id;
     Date sendDate;
+    int referrerNumbers;
     int topic;
     int proceedingStatus;
     int satisfactionStatus;
@@ -19,7 +22,8 @@ public class CaseEntity {
     List<ReferrerEntity> referrerEntities = new ArrayList<>();
 
 
-    public CaseEntity(Date sendDate, int topic, int proceedingStatus, int satisfactionStatus, List<ReferrerEntity> referrerEntities) {
+    public CaseEntity(Date sendDate, int topic, int proceedingStatus, int satisfactionStatus, List<ReferrerEntity> referrerEntities,int referrerNumbers) {
+        this.referrerNumbers = referrerNumbers;
         this.sendDate = sendDate;
         this.topic = topic;
         this.proceedingStatus = proceedingStatus;
@@ -28,6 +32,17 @@ public class CaseEntity {
     }
 
     public CaseEntity() {
+    }
+
+
+    @Basic
+    @Column(name="REFERRER_NUMBERS")
+    public int getReferrerNumbers() {
+        return referrerNumbers;
+    }
+
+    public void setReferrerNumbers(int referrerNumbers) {
+        this.referrerNumbers = referrerNumbers;
     }
 
     @Id
@@ -44,6 +59,7 @@ public class CaseEntity {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "SEND_DATE")
+    @JsonFormat(shape = JsonFormat.Shape.STRING ,pattern = "yyyy-MM-dd")
     public Date getSendDate() {
         return sendDate;
     }

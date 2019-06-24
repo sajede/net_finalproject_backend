@@ -7,6 +7,8 @@ import java.util.List;
 
 @Entity
 @Table(name="USER_TB")
+@NamedQuery(query = "Select e from UserEntity e where e.emailAddress = :emailAddress", name = "find user by email")
+@NamedQuery(query = "Select e from UserEntity e where e.sessionId = :sessionId", name = "find user by sessionid")
 public class UserEntity {
 
 
@@ -17,11 +19,13 @@ public class UserEntity {
     String password;
     String role;
     String sessionId;
+    boolean approved;
 
-    List<ReferrerEntity> referrerEntities = new ArrayList<>();
+    List<ReferrerEntity> toReferrerEntities = new ArrayList<>();
+    List<ReferrerEntity> fromReferrerEntities = new ArrayList<>();
 
 
-    public UserEntity( String name, String family, String emailAddress, String password, String role) {
+    public UserEntity(String name, String family, String emailAddress, String password, String role) {
         this.name = name;
         this.family = family;
         this.emailAddress = emailAddress;
@@ -30,6 +34,17 @@ public class UserEntity {
     }
 
     public UserEntity() {
+    }
+
+
+    @Basic
+    @Column(name="APPROVED")
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
 
@@ -44,15 +59,27 @@ public class UserEntity {
     }
 
     @OneToMany(
-            mappedBy = "USER_TB",
+            mappedBy = "toUser",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    public List<ReferrerEntity> getReferrerEntities() {
-        return referrerEntities;
+    public List<ReferrerEntity> getToReferrerEntities() {
+        return toReferrerEntities;
     }
 
-    public void setReferrerEntities(List<ReferrerEntity> referrerEntities) {
-        this.referrerEntities = referrerEntities;
+    public void setToReferrerEntities(List<ReferrerEntity> toReferrerEntities) {
+        this.toReferrerEntities = toReferrerEntities;
+    }
+
+    @OneToMany(
+            mappedBy = "fromUser",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    public List<ReferrerEntity> getFromReferrerEntities() {
+        return fromReferrerEntities;
+    }
+
+    public void setFromReferrerEntities(List<ReferrerEntity> fromReferrerEntities) {
+        this.fromReferrerEntities = fromReferrerEntities;
     }
 
     @Id
@@ -125,7 +152,6 @@ public class UserEntity {
                 ", emailAddress='" + emailAddress + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", referrerEntities=" + referrerEntities +
                 '}';
     }
 }
